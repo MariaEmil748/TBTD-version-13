@@ -260,7 +260,7 @@ public class ReadDataDetailsFragment extends Fragment implements HandheldAdapter
                         }else {
                             serialnumber.getText().clear();
                         }
-                        if (Multiarraylis.size() == 20 ){
+                        if (Multiarraylis.size() == 50 ){
                             serialnumber.setVisibility(View.GONE);
                             serialnumber.clearFocus();
                         }
@@ -377,33 +377,61 @@ public class ReadDataDetailsFragment extends Fragment implements HandheldAdapter
             return;
         }
 
-        // Limit to first 100 items
+        // Limit to first 50 items
         final ArrayList<String> toProcess = new ArrayList<>();
-        for (int i = 0; i < Multiarraylis.size() && i < 100; i++) {
+        for (int i = 0; i < Multiarraylis.size() && i < 50; i++) {
             toProcess.add(Multiarraylis.get(i));
         }
 
         simpleProgressBar.setVisibility(View.VISIBLE);
-        Toast.makeText(getContext(), "🚀 Fast fetching " + toProcess.size() + " assets...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Fetching " + toProcess.size() + " assets (10 at a time)...", Toast.LENGTH_SHORT).show();
 
-        // Prepare Retrofit
+        // Prepare Retrofit - reuse same connection
         url = AppConfig.getAssetsUrl(server);
         RetrofitClient retrofitClient = new RetrofitClient();
         Retrofit retrofit = retrofitClient.connect(url, user, pass);
         final SapClient sapClient = retrofit.create(SapClient.class);
 
-        // Results collector (thread-safe)
+        // Results collector
         final List<Tiasset> tempResults = new ArrayList<>();
-        final AtomicInteger completedCount = new AtomicInteger(0);
-        final int totalRequests = toProcess.size() * 2; // asset + serial for each
+        final AtomicInteger currentBatchIndex = new AtomicInteger(0);
 
-        // ✅ Send ALL requests concurrently (no chunks - maximum speed!)
-        for (final String value : toProcess) {
-            // Asset search - add "00000" prefix for numeric values for both TBTD and TEIE
-            String assetValue = value.matches("\\d+")
-                    ? "00000" + value
-                    : value;
+        // ✅ BATCH processing - processes 10 assets at a time (max 10 SAP sessions)
+        fetchNextBatch(toProcess, sapClient, tempResults, currentBatchIndex);
 
+        // Clear scanned list (UI input)
+        Multiarraylis.clear();
+    }
+    
+    // ✅ BATCH METHOD: Fetch 10 assets at a time (max 10 SAP sessions)
+    private void fetchNextBatch(final ArrayList<String> toProcess, final SapClient sapClient,
+                                 final List<Tiasset> tempResults, final AtomicInteger currentBatchIndex) {
+        final int batchSize = 10;
+        final int startIndex = currentBatchIndex.get() * batchSize;
+        
+        if (startIndex >= toProcess.size()) {
+            // All batches done - update UI
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    simpleProgressBar.setVisibility(View.GONE);
+                    updateUI(tempResults);
+                }
+            });
+            return;
+        }
+
+        // Calculate end index for this batch
+        final int endIndex = Math.min(startIndex + batchSize, toProcess.size());
+        final int totalRequests = (endIndex - startIndex) * 2; // asset + serial for each
+        final AtomicInteger completedInBatch = new AtomicInteger(0);
+
+        // Process 10 assets concurrently
+        for (int i = startIndex; i < endIndex; i++) {
+            final String value = toProcess.get(i);
+            final String assetValue = value.matches("\\d+") ? "00000" + value : value;
+
+            // Try asset number first
             Call<List<Tiasset>> assetCall = server.equalsIgnoreCase("tbtd")
                     ? sapClient.getassettbtd(assetValue)
                     : sapClient.getassetteie(assetValue);
@@ -426,33 +454,25 @@ public class ReadDataDetailsFragment extends Fragment implements HandheldAdapter
                             }
                         }
                     }
-                    
-                    if (completedCount.incrementAndGet() == totalRequests) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                simpleProgressBar.setVisibility(View.GONE);
-                                updateUI(tempResults);
-                            }
-                        });
+
+                    if (completedInBatch.incrementAndGet() == totalRequests) {
+                        // This batch is done, move to next batch
+                        currentBatchIndex.incrementAndGet();
+                        fetchNextBatch(toProcess, sapClient, tempResults, currentBatchIndex);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Tiasset>> call, Throwable t) {
-                    if (completedCount.incrementAndGet() == totalRequests) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                simpleProgressBar.setVisibility(View.GONE);
-                                updateUI(tempResults);
-                            }
-                        });
+                    if (completedInBatch.incrementAndGet() == totalRequests) {
+                        // This batch is done, move to next batch
+                        currentBatchIndex.incrementAndGet();
+                        fetchNextBatch(toProcess, sapClient, tempResults, currentBatchIndex);
                     }
                 }
             });
 
-            // Serial search
+            // Try serial number
             Call<List<Tiasset>> serialCall = server.equalsIgnoreCase("tbtd")
                     ? sapClient.getassetS(value)
                     : sapClient.getassetteieS(value);
@@ -475,35 +495,24 @@ public class ReadDataDetailsFragment extends Fragment implements HandheldAdapter
                             }
                         }
                     }
-                    
-                    if (completedCount.incrementAndGet() == totalRequests) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                simpleProgressBar.setVisibility(View.GONE);
-                                updateUI(tempResults);
-                            }
-                        });
+
+                    if (completedInBatch.incrementAndGet() == totalRequests) {
+                        // This batch is done, move to next batch
+                        currentBatchIndex.incrementAndGet();
+                        fetchNextBatch(toProcess, sapClient, tempResults, currentBatchIndex);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Tiasset>> call, Throwable t) {
-                    if (completedCount.incrementAndGet() == totalRequests) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                simpleProgressBar.setVisibility(View.GONE);
-                                updateUI(tempResults);
-                            }
-                        });
+                    if (completedInBatch.incrementAndGet() == totalRequests) {
+                        // This batch is done, move to next batch
+                        currentBatchIndex.incrementAndGet();
+                        fetchNextBatch(toProcess, sapClient, tempResults, currentBatchIndex);
                     }
                 }
             });
         }
-
-        // Clear scanned list (UI input)
-        Multiarraylis.clear();
     }
     
     private void updateUI(List<Tiasset> foundAssets) {
