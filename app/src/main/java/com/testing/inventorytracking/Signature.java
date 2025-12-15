@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -256,13 +257,26 @@ public class Signature extends AppCompatDialogFragment {
 
     public void verifyStoragePermissions() {
         // Check if we have write permission
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_EXTERNAL_STORAGE
-            );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Android 13+ uses READ_MEDIA_IMAGES
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                        REQUEST_EXTERNAL_STORAGE
+                );
+            } else {
+                Log.e("DB", "PERMISSION GRANTED");
+            }
         } else {
-            Log.e("DB", "PERMISSION GRANTED");
+            // Android 12 and below
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_EXTERNAL_STORAGE
+                );
+            } else {
+                Log.e("DB", "PERMISSION GRANTED");
+            }
         }
     }
 }

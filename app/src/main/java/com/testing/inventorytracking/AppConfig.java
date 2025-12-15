@@ -4,8 +4,8 @@ public class AppConfig {
 
     // ✅ Choose environment globally
     // Change to "PROD" when you go live
-//    private static final String ENVIRONMENT = "QAS";
-    private static final String ENVIRONMENT = "PROD";
+    private static final String ENVIRONMENT = "QAS";
+//    private static final String ENVIRONMENT = "PROD";
 
     // ✅ TBTD URLs
     private static final String TBTD_QAS_BASE = "http://10.12.6.188:8030/";
