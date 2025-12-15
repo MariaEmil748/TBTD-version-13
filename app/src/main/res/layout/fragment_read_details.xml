@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/read_fragment"
+    android:orientation="vertical"
+    android:background="#E3F3FF"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/PBContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/getdata"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:layout_below="@+id/PBContainer"
+        android:scrollbars="vertical"
+        android:id="@+id/rec2"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:id="@+id/Liner_Room"
+        android:background="#B3CFE5"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Room_Number"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/dark"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/room_NumberStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registered_Assets"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/dark"
+                >
+            </TextView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0"
+                android:inputType="text"
+                android:textSize="20sp"
+                android:id="@+id/actual_AssetsStock"
+                android:textStyle="bold"
+                >
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Difference_Count"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/dark"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/difference_CountStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/getdata"
+        android:text="Get Data "
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/radiogroup"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/register_button"
+
+        tools:ignore="NotSibling">
+
+    </Button>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/radiogroup"
+        android:layout_toRightOf="@+id/getdata"
+        android:textAlignment="center"
+        android:id="@+id/serialNumberHand"
+        android:background="@drawable/rounded_white"
+        android:drawableLeft="@drawable/barcodescanner"
+        android:hint="Click To Scan"
+        android:paddingStart="10dp"
+        >
+
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/lineredit"
+        android:layout_below="@+id/Liner_Room"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="Total Scanned Asset :  "
+            android:visibility="gone"
+            android:id="@+id/totalTxS"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"></TextView>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/totalCount"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:text="0"
+            android:textStyle="bold"
+            ></TextView>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:id="@+id/radiogroup"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lineredit"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Room Scan"
+            android:id="@+id/Roomradio"
+            android:layout_height="wrap_content"></RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1.1"
+            android:text="Asset Number"
+            android:textSize="14sp"
+            android:id="@+id/assetnumberradio"
+            android:layout_height="wrap_content"></RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:text="Serial Number"
+            android:layout_weight="1.1"
+            android:textSize="14sp"
+            android:id="@+id/serialnumberradio"
+            android:layout_height="wrap_content"></RadioButton>
+    </RadioGroup>
+
+
+</RelativeLayout>
+

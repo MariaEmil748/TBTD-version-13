@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMajor">10%</item>
+        <item name="android:windowMinWidthMinor">10%</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="Dialogfragment" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMajor">20%</item>
+        <item name="titleTextColor">@color/orange</item>
+        <item name="android:textColor">@color/kohly</item>
+        <item name="android:windowMinWidthMinor">20%</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <!-- ✅ Add this to fix the Signature.java error -->
+    <style name="fragmenttt" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+</resources>

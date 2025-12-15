@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:title="Search"
+        android:id="@+id/logout"
+        android:icon="@drawable/logout2"
+        app:showAsAction="ifRoom|collapseActionView"
+      >
+    </item>
+
+    <item
+        android:title="Search"
+        android:id="@+id/Search_item"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView">
+    </item>
+
+
+    <item
+        android:title="Save current"
+        android:id="@+id/savaRoom"
+        app:showAsAction="withText"></item>
+
+    <item
+        android:title="Delete data"
+        android:id="@+id/delete"
+        app:showAsAction="withText"></item>
+
+    <item
+        android:title="Upload"
+        android:id="@+id/savasummary"
+        app:showAsAction="withText"></item>
+
+    <item
+        android:title="Assign Asset"
+        android:id="@+id/AssignAssets"
+        app:showAsAction="withText"></item>
+
+
+
+
+</menu>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RoomMapping_fragment"
+    android:background="#E3F3FF"
+
+    >
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyrecycleR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchingR"
+        android:padding="4dp"
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/radiogroup"
+        android:layout_toRightOf="@+id/getAssetsR"
+        android:textAlignment="center"
+        android:id="@+id/searchingR"
+        android:background="@drawable/rounded_white"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:hint="Choose Search Method "
+        android:paddingStart="10dp"
+        >
+
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:id="@+id/Liner_Room"
+        android:background="#B3CFE5"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Room_Number"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:textColor="@color/dark"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/room_Number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registered_Assets"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0"
+                android:inputType="text"
+                android:textSize="20sp"
+                android:id="@+id/actual_Assets"
+                android:textStyle="bold"
+                >
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Difference_Count"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/dark"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/difference_Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/linerSearch"
+        android:layout_below="@+id/Liner_Room"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:id="@+id/totalTxR"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:text="Total Scanned Asset : "
+            ></TextView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/totalCountSR"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:text="0"
+            android:visibility="gone"
+            android:textStyle="bold"
+            ></TextView>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:id="@+id/radiogroup"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linerSearch"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:text="Room Scan"
+            android:layout_weight="1"
+            android:id="@+id/room_ScanR"
+            android:layout_height="wrap_content"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/assetSearchR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:textSize="14sp"
+            android:text="Asset-Number"></RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:text="Serial-Number"
+            android:layout_weight="1.2"
+            android:textSize="14sp"
+            android:id="@+id/serialsearchR"
+            android:layout_height="wrap_content"></RadioButton>
+
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/getAssetsR"
+        android:layout_below="@+id/radiogroup"
+        android:layout_marginLeft="5dp"
+        android:textAllCaps="false"
+        android:text="Get Assets"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:background="@drawable/register_button"
+        tools:ignore="NotSibling">
+
+    </Button>
+
+</RelativeLayout>
+

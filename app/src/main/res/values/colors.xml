@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ✅ App Brand Colors -->
+    <color name="colorPrimary">#4a7fa7</color>
+    <color name="colorPrimaryDark">#1a3d63</color>
+    <color name="colorAccent">#1a3d63</color>
+
+    <!-- ✅ Common UI Colors -->
+    <color name="white">#F6FAFD</color>
+    <color name="black">#000000</color>
+    <color name="black2">#313131</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="dark_grey">#424242</color>
+    <color name="offWhite">#BDBDBD</color>
+    <color name="whiteshwya">#F6FAFD</color>
+    <color name="dark">#263238</color>
+
+    <!-- ✅ Accent Colors -->
+    <color name="orange">#FF9100</color>
+    <color name="dark_orange">#EF6C00</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="red">#D32F2F</color>
+    <color name="green">#4CAF50</color>
+    <color name="blue_grey">#37474F</color>
+
+    <!-- ✅ Custom Theme Shades -->
+    <color name="kohly">#3F4E96</color>
+    <color name="zahrii">#5ba0ff</color>
+    <color name="azraaaa">#84b2ca</color>
+    <color name="startblue">#31435b</color>
+    <color name="endblue">#0bcce6</color>
+    <color name="colorhint">#efc74e</color>
+    <color name="colorsmallimage">#009a9b</color>
+
+    <!-- Colors used by the main theme -->
+    <color name="colorBackground">#F6FAFD</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+
+</resources>

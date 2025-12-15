@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#E3F3FF"
+    android:padding="16dp">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ip_Address"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        >
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_ip"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="text"
+        android:background="@drawable/rounded_white"
+        android:drawablePadding="5dp"
+        android:hint="Write Ip-Address"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:drawableTint="@color/dark_grey"
+        android:paddingStart="10dp"
+        android:textSize="14sp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="36dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/register_button"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textAllCaps="false"
+        android:text="Ok"
+        android:id="@+id/btn_ip"
+        android:textColor="@color/white"
+        android:textStyle="normal" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
